@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack(content: {
-            SpeedoMeterView()
+            CustomImageView()
                 .padding()
         })
     }
@@ -61,6 +61,28 @@ struct SpeedoMeterView: View {
         } currentValueLabel: {
             Text("\(currentSpeed.formatted(.number))km/h")
         } minimumValueLabel: {
+            Text(0.formatted(.number))
+        }maximumValueLabel: {
+            Text(200.formatted(.number))
+        }
+    }
+}
+
+//4
+struct CustomImageView: View {
+    
+    @State private var currentSpeed = 100.0
+    
+    var body: some View {
+        Gauge(value: currentSpeed, in: 0...200) {
+            Image(systemName: "gauge.medium")
+                .font(.system(size: 50))
+        }currentValueLabel: {
+            HStack(content: {
+                Image(systemName: "gauge.high")
+                Text("\(currentSpeed.formatted(.number))km/h")
+            })
+        }minimumValueLabel: {
             Text(0.formatted(.number))
         }maximumValueLabel: {
             Text(200.formatted(.number))
